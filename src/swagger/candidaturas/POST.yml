@@ -1,0 +1,31 @@
+Cria uma candidatura conforme dados enviados
+---
+tags:
+  - candidaturas
+parameters:
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        id_vaga:
+          type: integer
+          description: O id da vaga sendo postulada
+        id_pessoa:
+          type: integer
+          description: O id do candidato à vaga
+responses:
+  200:
+    description: A candidatura foi criada com sucesso
+    schema:
+      example:
+        candidatura:
+          id: 1
+          id_vaga: 10
+          id_pessoa: 100
+  400:
+    description: A vaga não foi criada por um erro de parâmetro
+    schema:
+      example:
+        message:
+          nome_do_parametro: detalhamento do que é esperado no parâmetro
