@@ -1,5 +1,5 @@
 """
-Define os verbos REST para Pessoas
+Define os verbos REST para Vagas
 """
 
 from flasgger import swag_from
@@ -7,28 +7,35 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 from flask.json import jsonify
 
-from repositories import PessoaRepository
+from repositories import VagaRepository
 from util import parse_params
 
 
-class PessoaResource(Resource):
-    """ Verbos relacionados a pessoas """
+class VagaResource(Resource):
+    """ Verbos relacionados a vagas """
 
     @staticmethod
     @parse_params(
         Argument(
-            'nome',
+            'empresa',
             location='json',
             required=True,
             type=str,
-            help='O nome completo da pessoa deve ser informado.'
+            help='O nome da empresa anunciante deve ser informado.'
         ),
         Argument(
-            'profissao',
+            'titulo',
             location='json',
             required=True,
             type=str,
-            help='A profissao da pessoa deve ser especificada.'
+            help='O titulo da vaga anunciada deve ser informado.'
+        ),
+        Argument(
+            'descricao',
+            location='json',
+            required=True,
+            type=str,
+            help='A descricao da vaga anunciada deve ser especificada.'
         ),
         Argument(
             'localizacao',
@@ -47,13 +54,14 @@ class PessoaResource(Resource):
             help='O nivel da pessoa deve ser um inteiro na faixa especificada.'
         ),
     )
-    @swag_from('../swagger/pessoas/POST.yml')
-    def post(nome, profissao, localizacao, nivel):
-        """ Cria uma pessoa com base nos dados enviados """
-        pessoa = PessoaRepository.create(
-            nome=nome,
-            profissao=profissao,
+    @swag_from("../swagger/vagas/POST.yml")
+    def post(empresa, titulo, descricao, localizacao, nivel):
+        """ Cria uma vaga com base nos dados enviados """
+        vaga = VagaRepository.create(
+            empresa=empresa,
+            titulo=titulo,
+            descricao=descricao,
             localizacao=localizacao,
             nivel=nivel
         )
-        return jsonify({"pessoa": pessoa.json})
+        return jsonify({"vaga": vaga.json})

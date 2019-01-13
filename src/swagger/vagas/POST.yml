@@ -1,0 +1,43 @@
+Cria uma vaga conforme dados enviados
+---
+tags:
+  - vagas
+parameters:
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        empresa:
+          type: string
+          description: O nome da empresa que está publicando a vaga
+        titulo:
+          type: string
+          description: O título da vaga anunciada
+        descricao:
+          type: string
+          description: A descrição da vaga anunciada
+        localizacao:
+          type: string
+          description: A localizacao da vaga anunciada
+        nivel:
+          type: integer
+          description: O nivel da vaga anunciada conforme a faixa de níveis
+responses:
+  200:
+    description: A vaga foi criada com sucesso
+    schema:
+      example:
+        pessoa:
+          id: 1
+          empresa: Dundler Mifflin Paper Co.
+          titulo: Sales Rep
+          descricao: Seller for paper and paper products
+          localizacao: B
+          nivel: 3
+  400:
+    description: A vaga não foi criada por um erro de parâmetro
+    schema:
+      example:
+        message:
+          nome_do_parametro: detalhamento do que é esperado no parâmetro
