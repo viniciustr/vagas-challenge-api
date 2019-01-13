@@ -1,0 +1,32 @@
+Cria uma pessoa conforme dados enviados
+---
+tags:
+  - pessoa
+parameters:
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        nome:
+          type: string
+          description: O nome completo da pessoa
+        profissao:
+          type: string
+          description: A profissao da pessoa
+        localizacao:
+          type: string
+          description: A localizacao da pessoa
+        nivel:
+          type: integer
+          description: O nivel da pessoa
+responses:
+  200:
+    description: A pessoa foi criada na base com sucesso
+    schema:
+      example:
+        user:
+          nome: Fulano de Tal
+          profissao: Analista de Sistemas
+          localizacao: B
+          nivel: 3

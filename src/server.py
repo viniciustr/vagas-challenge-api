@@ -16,10 +16,10 @@ server = Flask(__name__)
 
 server.config['SWAGGER'] = {
     "swagger_version": "2.0",
-    "title": "Application",
+    "title": "VAGAS.com API Challenge",
     "specs": [
         {
-            "version": "0.0.1",
+            "version": "1.0",
             "title": "Application",
             "endpoint": 'spec',
             "route": '/application/spec',
