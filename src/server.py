@@ -25,14 +25,13 @@ server.config['SWAGGER'] = {
             "route": '/application/spec',
             "rule_filter": lambda rule: True  # all in
         }
-    ],
-    "static_url_path": "/application/apidocs"
+    ]
 }
 
 Swagger(server)
 
 server.debug = config.DEBUG
-server.config['SQLALCHEMY_DATABASE_URI'] = config.DB_URI
+server.config["SQLALCHEMY_DATABASE_URI"] = config.DB_URI
 db.init_app(server)
 db.app = server
 
@@ -40,8 +39,8 @@ for blueprint in vars(routes).values():
     if isinstance(blueprint, Blueprint):
         server.register_blueprint(
             blueprint,
-            url_prefix=config.APPLICATION_ROOT
+            url_prefix="/v1"
         )
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     server.run(host=config.HOST, port=config.PORT)

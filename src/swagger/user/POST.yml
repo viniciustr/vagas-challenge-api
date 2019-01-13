@@ -7,10 +7,12 @@ parameters:
     in: path
     type: string
     description: the last name of the user
+    required: true
   - name: first_name
     in: path
     type: string
     description: the last name of the user
+    required: true
   - name: body
     in: body
     schema:
