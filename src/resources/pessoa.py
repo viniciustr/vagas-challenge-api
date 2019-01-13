@@ -43,11 +43,11 @@ class PessoaResource(Resource):
             location='json',
             required=True,
             type=int,
-            choices=range(1,6),
+            choices=range(1, 6),
             help='O nivel da pessoa deve ser um inteiro na faixa especificada.'
         ),
     )
-    @swag_from('../swagger/pessoa/POST.yml')
+    @swag_from('../swagger/pessoas/POST.yml')
     def post(nome, profissao, localizacao, nivel):
         """ Cria uma pessoa com base nos dados enviados """
         pessoa = PessoaRepository.create(

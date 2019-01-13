@@ -21,7 +21,7 @@ server.config['SWAGGER'] = {
     "specs": [
         {
             "version": "1.0",
-            "title": "Application",
+            "title": "VAGAS.com API Challenge",
             "endpoint": 'spec',
             "route": '/application/spec',
             "rule_filter": lambda rule: True  # all in
