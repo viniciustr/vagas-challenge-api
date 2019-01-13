@@ -7,7 +7,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 from flask.json import jsonify
 
-# from repositories import UserRepository
+from repositories import PessoaRepository
 from util import parse_params
 
 
@@ -20,33 +20,40 @@ class PessoaResource(Resource):
             'nome',
             location='json',
             required=True,
-            help='O nome completo da pessoa.'
+            type=str,
+            help='O nome completo da pessoa deve ser informado.'
         ),
         Argument(
             'profissao',
             location='json',
             required=True,
-            help='A profissao da pessoa.'
+            type=str,
+            help='A profissao da pessoa deve ser especificada.'
         ),
         Argument(
             'localizacao',
             location='json',
             required=True,
-            help='A localizacao da pessoa.'
+            type=str,
+            choices=["A", "B", "C", "D", "E", "F"],
+            help="A localizacao da pessoa deve ser uma existente no mapa."
         ),
         Argument(
             'nivel',
             location='json',
             required=True,
-            help='O nivel da pessoa.'
+            type=int,
+            choices=range(1,6),
+            help='O nivel da pessoa deve ser um inteiro na faixa especificada.'
         ),
     )
     @swag_from('../swagger/pessoa/POST.yml')
     def post(nome, profissao, localizacao, nivel):
         """ Cria uma pessoa com base nos dados enviados """
-        # user = UserRepository.create(
-        #     last_name=last_name,
-        #     first_name=first_name,
-        #     age=age
-        # )
-        return jsonify({'user': 'AAA'})
+        pessoa = PessoaRepository.create(
+            nome=nome,
+            profissao=profissao,
+            localizacao=localizacao,
+            nivel=nivel
+        )
+        return jsonify({"pessoa": pessoa.json})

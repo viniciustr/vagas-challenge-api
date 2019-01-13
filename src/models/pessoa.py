@@ -15,7 +15,7 @@ class Pessoa(db.Model, BaseModel, metaclass=MetaBaseModel):
     nivel = db.Column(db.Integer, nullable=False)
 
     def __init__(self, nome, profissao, localizacao, nivel):
-        """ Cria uma nova Pessoa """
+        """ Instancia uma nova Pessoa """
         self.nome = nome
         self.profissao = profissao
         self.localizacao = localizacao
