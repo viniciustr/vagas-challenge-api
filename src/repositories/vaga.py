@@ -11,7 +11,7 @@ class VagaRepository:
         """ Busca uma vaga pelo seu id unico """
         return Vaga.query.filter_by(
             id=id
-        ).one()
+        ).one_or_none()
 
     @staticmethod
     def create(empresa, titulo, descricao, localizacao, nivel):

@@ -4,11 +4,11 @@ Define o blueprint para candidaturas
 from flask import Blueprint
 from flask_restful import Api
 
-from resources import UserResource
+from resources import CandidaturaResource
 
 
 CANDIDATURAS_BLUEPRINT = Blueprint('candidaturas', __name__)
 Api(CANDIDATURAS_BLUEPRINT).add_resource(
-    UserResource,
+    CandidaturaResource,
     '/candidaturas'
 )

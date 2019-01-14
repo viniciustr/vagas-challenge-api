@@ -1,7 +1,7 @@
 Cria uma pessoa conforme dados enviados
 ---
 tags:
-  - pessoa
+  - pessoas
 parameters:
   - name: body
     in: body

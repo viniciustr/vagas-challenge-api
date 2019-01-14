@@ -11,7 +11,7 @@ class PessoaRepository:
         """ Busca uma pessoa pelo seu id unico """
         return Pessoa.query.filter_by(
             id=id
-        ).one()
+        ).one_or_none()
 
     @staticmethod
     def create(nome, profissao, localizacao, nivel):
