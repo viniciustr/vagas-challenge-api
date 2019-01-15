@@ -1,0 +1,1 @@
+from .candidatura import CandidaturaService

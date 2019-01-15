@@ -8,7 +8,7 @@ from flask_restful import Resource
 from flask_restful.reqparse import Argument
 from flask.json import jsonify
 
-from repositories import CandidaturaRepository, VagaRepository, PessoaRepository
+from services import CandidaturaService
 from util import parse_params
 
 
@@ -39,26 +39,16 @@ class CandidaturaResource(Resource):
         O score da candidatura é calculado no momento do cadastro
         """
 
-        vaga = VagaRepository.get_by_id(id_vaga)
-        if vaga is None:
-            abort(400, "Vaga não encontrada para o id informado")
-        
-        pessoa = PessoaRepository.get_by_id(id_pessoa)
-        if pessoa is None:
-            abort(400, "Pessoa não encontrada para o id informado")
+        try:
+            service = CandidaturaService()
+            candidatura = service.cria_candidatura(id_vaga, id_pessoa)
 
-        # TODO: implementar calculo de score com base nos objetos vaga e pessoa
-        score = 55
-
-        candidatura = CandidaturaRepository.create(
-            id_vaga=id_vaga,
-            id_pessoa=id_pessoa,
-            score=score
-        )
-        return jsonify({
-            "candidatura": {
-                "id": candidatura.id,
-                "id_vaga": candidatura.id_vaga,
-                "id_pessoa": candidatura.id_pessoa
-            }
-        })
+            return jsonify({
+                "candidatura": {
+                    "id": candidatura.id,
+                    "id_vaga": candidatura.id_vaga,
+                    "id_pessoa": candidatura.id_pessoa
+                }
+            })
+        except ValueError as ex:
+            abort(400, ex.message)
