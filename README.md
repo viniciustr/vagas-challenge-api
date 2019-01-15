@@ -1,4 +1,28 @@
-# Flask Api Starter Kit [![CircleCI](https://circleci.com/gh/antkahn/flask-api-starter-kit/tree/master.svg?style=svg)](https://circleci.com/gh/antkahn/flask-api-starter-kit/tree/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/antkahn/flask-api-starter-kit/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/antkahn/flask-api-starter-kit/?branch=master)
+# Desafio Técnico API VAGAS.com
+
+Esta aplicação usou o template Flask Api Starter Kit, disponível [aqui](https://github.com/antkahn/flask-api-starter-kit.git).
+
+## Sobre a aplicação
+
+Esta aplicação implementa todos os endpoints solicitados no desafio técnico, utilizando uma arquitetura RESTful e documentada através do Swagger.
+
+## Botando para funcionar
+
+Siga estes passos bem simples!
+
+- Certifique-se que o Docker e Docker-compose estão instalados na sua máquina
+- Clone este projeto
+- Instale as dependências com o comando `$ make install` no diretório do projeto
+- Aplique as migrações do banco de dados com o comando `$ make upgrade` no diretório do projeto
+- Inicie a aplicação com o comando `$ make start`
+- Acesse o Swagger do projeto [aqui](http://localhost:3000/apidocs)
+- Pronto!
+
+## Mais detalhes
+
+Consulte a documentação abaixo para aprender o que mais pode ser feito no projeto!
+
+# Documentação original do Flask Api Starter Kit
 
 This starter kit is designed to allow you to create very fast your Flask API.
 
