@@ -1,0 +1,25 @@
+Retorna o ranking de candidaturas para uma vaga em ordem decrescente de score
+---
+tags:
+  - ranking
+parameters:
+  - name: id_vaga
+    in: path
+    type: integer
+    description: O id da vaga
+    required: true
+responses:
+  200:
+    description: O ranking foi obtido com sucesso
+    schema:
+      example:
+        - nome: Mary Jane
+          profissao: Engenheira de Software
+          localizacao: A
+          nivel: 5
+          score: 85
+        - nome: Peter Parker
+          profissao: Fotografo
+          localizacao: D
+          nivel: 1
+          score: 17

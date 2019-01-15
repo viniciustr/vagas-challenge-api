@@ -1,6 +1,6 @@
 """ Repositorio Vaga """
 
-from models import Vaga
+from models import db, Candidatura, Pessoa, RankingItem, Vaga
 
 
 class VagaRepository:
@@ -25,3 +25,24 @@ class VagaRepository:
         )
 
         return vaga.save()
+
+    @staticmethod
+    def get_ranking_by_id(id_vaga):
+        """ Obtem o ranking de candidaturas para uma vaga """
+        res = db.session.query(
+            Pessoa.nome,
+            Pessoa.profissao,
+            Pessoa.localizacao,
+            Pessoa.nivel,
+            Candidatura.score
+        ).select_from(
+            Pessoa
+        ).join(
+            Candidatura, Pessoa.id == Candidatura.id_pessoa
+        ).filter(
+            Candidatura.id_vaga == id_vaga
+        ).order_by(
+            Candidatura.score.desc()
+        ).all()
+
+        return [RankingItem(item[0], item[1], item[2], item[3], item[4]) for item in res]
