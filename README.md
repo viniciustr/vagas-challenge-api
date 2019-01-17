@@ -1,14 +1,35 @@
 # Desafio Técnico API VAGAS.com
 
-Esta aplicação usou o template Flask Api Starter Kit, disponível [aqui](https://github.com/antkahn/flask-api-starter-kit.git).
-
 ## Sobre a aplicação
 
-Esta aplicação implementa todos os endpoints solicitados no desafio técnico, utilizando uma arquitetura RESTful e documentada através do Swagger.
+Esta aplicação usou o template Flask Api Starter Kit, disponível [aqui](https://github.com/antkahn/flask-api-starter-kit.git).
+
+Ela implementa todos os endpoints solicitados no desafio técnico, utilizando uma arquitetura RESTful e documentada através do Swagger.
+
+### Arquitetura
+
+Ela está estruturada em containers Docker, utilizando o docker-compose para orquestrá-los. Os componentes são:
+
+* Container Python: contém a API em si, implementada com o framework Flask e demais componentes;
+* Container PostgreSQL: contém o banco de dados da aplicação, onde são armazenadas as tabelas com as pessoas, vagas e candidaturas, de acordo com os requisitos da API.
+
+A aplicação Python está baseada no padrão MVC (Model View Controller) e está estruturada nas seguintes camadas:
+
+* Routes: mapeia as rotas da aplicação (eg. `/v1/vagas`) aos recursos;
+* Resources: são, em essência, os controllers da aplicação. Contêm a implementação dos verbos HTTP e direcionam para os services ou repositories adequados para atender suas respectivas requisições;
+* Services: implementam as regras de negócio da aplicação. No caso, foi utilizada especialmente para a parte de candidaturas, pois envolvia o cálculo da menor distância e _score_ da candidatura (parâmetros *N* e *D*);
+* Repositories: executam as operações de banco de dados necessárias para persistir e obter dados;
+* Models: implementam as classes que modelam as tabelas do banco de dados, através do framework ORM SQLAlchemy. Dessa forma, não foi necessário criar nenhuma tabela ou consulta SQL manualmente.
+
+### Versionamento de banco de dados
+
+As alterações nos `models` descritos anteriormente envolviam, como consequência, alterações no banco de dados. Para controlar isso, a aplicação conta com o componente `alembic`, o qual cria _migrations_, isto é, scripts de versionamento do banco de dados. Ao inicializar a aplicação, basta executar todas as _migrations_ para chegar à versão mais recente do conjunto de tabelas do banco de dados.
 
 ## Botando para funcionar
 
-Siga estes passos bem simples!
+Chega de papo! Vamos executar a aplicação!
+
+Para isso, siga estes passos bem simples!
 
 - Certifique-se que o Docker e Docker-compose estão instalados na sua máquina
 - Clone este projeto
